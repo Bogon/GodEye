@@ -10,7 +10,7 @@ import Foundation
 
 extension UIScreen {
     class func onscreenFrame() -> CGRect {
-        return self.main.applicationFrame
+        return self.main.bounds
     }
     
     class func offscreenFrame() -> CGRect {

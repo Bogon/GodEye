@@ -26,7 +26,7 @@ class LeakRecordViewModel: BaseRecordViewModel {
     }
     
     private func headerString() -> NSAttributedString {
-        return self.headerString(with: "Leak", content: "[\(self.model.clazz): \(self.model.address)]", color: UIColor(hex: 0xB754C4))
+        return self.headerString(with: "Leak", content: "[\(self.model.clazz ?? ""): \(self.model.address ?? "")]", color: UIColor(hex: 0xB754C4))
     }
     
   

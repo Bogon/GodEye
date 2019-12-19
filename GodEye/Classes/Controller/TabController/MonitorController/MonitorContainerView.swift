@@ -30,8 +30,11 @@ class MonitorContainerView: UIScrollView,FPSDelegate,NetDelegate {
         self.deviceView.configure(nameString: System.hardware.deviceModel,
                                   osString: System.hardware.systemName + " " + System.hardware.systemVersion)
         
-        Store.shared.networkByteDidChange { [weak self] (byte:Double) in
-            self?.appNetView.configure(byte: byte)
+        
+        weak var weakSelf = self
+        Store.shared.networkByteDidChange { (byte:Double) in
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.appNetView.configure(byte: byte)
         }
         
         

@@ -55,7 +55,7 @@ class RecordTableView: UITableView {
 class RecordTableViewDataSource: NSObject {
     private let maxLogItems: Int = 1000
     
-    fileprivate(set) var recordData: [RecordORMProtocol]!
+    fileprivate(set) var recordData: [RecordORMProtocol]! = [RecordORMProtocol]()
     
     private var logIndex: Int = 0
     fileprivate var type: RecordType!
@@ -82,7 +82,7 @@ class RecordTableViewDataSource: NSObject {
             return LeakRecordModel.select(at: self.logIndex)
         }
         
-        fatalError("type:\(self.type) not define the database")
+        fatalError("type:\(self.type ?? RecordType.log) not define the database")
     }
     
     private func addCount() {
@@ -101,15 +101,20 @@ class RecordTableViewDataSource: NSObject {
         }
         
         for model in models.reversed() {
+            if self.recordData == nil {
+                self.recordData = [RecordORMProtocol]()
+            }
             self.recordData.insert(model, at: 0)
         }
         return true
     }
     
     func addRecord(model:RecordORMProtocol) {
-        
+        if self.recordData == nil {
+            self.recordData = [RecordORMProtocol]()
+        }
         if self.recordData.count != 0 &&
-            type(of: model).type != self.type {
+            Swift.type(of: model).type != self.type {
             return
         }
         
@@ -121,6 +126,9 @@ class RecordTableViewDataSource: NSObject {
     }
     
     func cleanRecord() {
+        if self.recordData == nil {
+            self.recordData = [RecordORMProtocol]()
+        }
         self.recordData.removeAll()
     }
 }
@@ -128,7 +136,8 @@ class RecordTableViewDataSource: NSObject {
 extension RecordTableViewDataSource: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.recordData.count
+        guard let cellCount = self.recordData else { return 0 }
+        return cellCount.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -51,8 +51,7 @@ extension RecordType {
             return "Leak"
         case .command:
             return "Terminal"
-        default:
-            return ""
+
         }
     }
     
@@ -70,8 +69,7 @@ extension RecordType {
             return "memory leak information"
         case .command:
             return "terminal with commands and results"
-        default:
-            return ""
+  
         }
     }
 }

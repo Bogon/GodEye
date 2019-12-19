@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CCProgressHUDKit
 
 class MonitorController: UIViewController {
     
@@ -30,8 +31,8 @@ class MonitorController: UIViewController {
 extension MonitorController: MonitorContainerViewDelegate {
     func container(container:MonitorContainerView, didSelectedType type:MonitorSystemType) {
         
-        UIAlertView.quickTip(message: "detail and historical data coming soon")
-        
+        //UIAlertView.quickTip(message: "detail and historical data coming soon")
+        MBProgressHUD.showSuccess("detail and historical data coming soon")
         if type.hasDetail {
             //TODO: add detail
             

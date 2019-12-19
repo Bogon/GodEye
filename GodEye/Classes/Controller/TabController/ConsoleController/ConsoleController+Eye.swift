@@ -9,7 +9,7 @@
 import Foundation
 import ASLEye
 import CrashEye
-import NetworkEye_swift
+import NetworkEye
 import ANREye
 import Log4G
 import LeakEye
@@ -34,7 +34,7 @@ extension ConsoleController {
             pc.addRecord(model: model)
         }else {
             
-            let type = type(of:model).type
+            let type = Swift.type(of:model).type
             type.addUnread()
             self.reloadRow(of: type)
         }
@@ -62,9 +62,10 @@ extension ConsoleController: NetworkEyeDelegate {
     func networkEyeDidCatch(with request:URLRequest?,response:URLResponse?,data:Data?) {
         Store.shared.addNetworkByte(response?.expectedContentLength ?? 0)
         let model = NetworkRecordModel(request: request, response: response as? HTTPURLResponse, data: data)
-        
-        model.insert(complete:  { [unowned self] (success:Bool) in
-            self.addRecord(model: model)
+        weak var weakSelf = self
+        model.insert(complete:  { (success:Bool) in
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.addRecord(model: model)
         })
     }
 }
@@ -74,8 +75,11 @@ extension ConsoleController: CrashEyeDelegate {
     /// god's crash eye callback
     func crashEyeDidCatchCrash(with model:CrashModel) {
         let model = CrashRecordModel(model: model)
-        model.insertSync(complete: { [unowned self] (success:Bool) in
-            self.addRecord(model: model)
+        weak var weakSelf = self
+        model.insertSync(complete: { (success:Bool) in
+            
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.addRecord(model: model)
         })
     }
 }
@@ -86,11 +90,13 @@ extension ConsoleController: ASLEyeDelegate {
     
     
     /// god's asl eye callback
-    func aslEye(aslEye:ASLEye,catchLogs logs:[String]) {
+    public func aslEye(_ aslEye:ASLEye,catchLogs logs:[String]) {
         for log in logs {
             let model = LogRecordModel(type: .asl, message: log)
-            model.insert(complete: { [unowned self] (success:Bool) in
-                self.addRecord(model: model)
+            weak var weakSelf = self
+            model.insert(complete: { (success:Bool) in
+                guard let strongSelf = weakSelf else { return }
+                strongSelf.addRecord(model: model)
             })
         }
     }
@@ -98,10 +104,12 @@ extension ConsoleController: ASLEyeDelegate {
 
 extension ConsoleController: LeakEyeDelegate {
     
-    func leakEye(leakEye:LeakEye,didCatchLeak object:NSObject) {
+    public func leakEye(_ leakEye:LeakEye,didCatchLeak object:NSObject) {
         let model = LeakRecordModel(obj: object)
-        model.insert { [unowned self] (success:Bool) in
-            self.addRecord(model: model)
+        weak var weakSelf = self
+        model.insert { (success:Bool) in
+             guard let strongSelf = weakSelf else { return }
+            strongSelf.addRecord(model: model)
         }
     }
 }
@@ -116,8 +124,10 @@ extension ConsoleController: ANREyeDelegate {
         let model = ANRRecordModel(threshold: threshold,
                                    mainThreadBacktrace: mainThreadBacktrace,
                                    allThreadBacktrace: allThreadBacktrace)
+        weak var weakSelf = self
         model.insert(complete:  { [unowned self] (success:Bool) in
-            self.addRecord(model: model)
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.addRecord(model: model)
         })
     }
 }

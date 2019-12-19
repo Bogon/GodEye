@@ -76,7 +76,7 @@ class NetworkRecordViewModel: BaseRecordViewModel {
     }
     
     private func responseExpectedContentLengthString() -> NSAttributedString {
-        return self.contentString(with: "responseExpectedContentLength", content: "\((self.model.responseExpectedContentLength ?? 0) / 1024)KB")
+        return self.contentString(with: "responseExpectedContentLength", content: "\((self.model.responseExpectedContentLength ) / 1024)KB")
     }
     
     private func responseTextEncodingNameString() -> NSAttributedString {
@@ -88,13 +88,13 @@ class NetworkRecordViewModel: BaseRecordViewModel {
     }
     
     private func responseStatusCodeString() -> NSAttributedString {
-        let status = "\(self.model.responseStatusCode ?? 200)"
+        let status = "\(self.model.responseStatusCode )"
         let str = self.contentString(with: "responseStatusCode", content: status)
         let result = NSMutableAttributedString(attributedString: str)
         let  range = result.string.NS.range(of: status)
         if range.location != NSNotFound {
             let color = status == "200" ? UIColor(hex: 0x1CC221) : UIColor(hex: 0xF5261C)
-            result.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+            result.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
         }
         return result
     }
@@ -109,7 +109,7 @@ class NetworkRecordViewModel: BaseRecordViewModel {
         
         let range = result.string.NS.range(of: responseAllHeaderFields)
         if range.location != NSNotFound {
-            result.addAttribute(NSFontAttributeName, value: UIFont.courier(with: 6), range: range)
+            result.addAttribute(NSAttributedStringKey.font, value: UIFont.courier(with: 6), range: range)
         }
         return result
     }
@@ -130,10 +130,10 @@ class NetworkRecordViewModel: BaseRecordViewModel {
             header = "responseXML"
         }
         
-        var result = NSMutableAttributedString(attributedString: self.contentString(with: header, content: transString,newline: true))
+        let result = NSMutableAttributedString(attributedString: self.contentString(with: header, content: transString,newline: true))
         let range = result.string.NS.range(of: transString)
         if range.location != NSNotFound {
-            result.addAttribute(NSFontAttributeName, value: UIFont.courier(with: 6), range: range)
+            result.addAttribute(NSAttributedStringKey.font, value: UIFont.courier(with: 6), range: range)
         }
         
         return result

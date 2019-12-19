@@ -27,11 +27,15 @@ class MonitorSysNetFlowView: UIButton {
     }
     
     func configure(wifiSend:UInt32,wifiReceived:UInt32,wwanSend:UInt32,wwanReceived:UInt32) {
+        weak var weakSelf = self
+           dispatch_async_safely_to_main_queue {
+               guard let strongSelf = weakSelf else { return }
+                strongSelf.wifiSendLabel.attributedText = strongSelf.attributedString(prefix: "wifi send:", byte: wifiSend)
+                strongSelf.wifiReceivedLabel.attributedText = strongSelf.attributedString(prefix: "wifi received:", byte: wifiReceived)
+                strongSelf.wwanSendLabel.attributedText = strongSelf.attributedString(prefix: "wwan send:", byte: wwanSend)
+                strongSelf.wwanReceivedLabel.attributedText = strongSelf.attributedString(prefix: "wwan received:", byte: wwanReceived)
+            }
         
-        self.wifiSendLabel.attributedText = self.attributedString(prefix: "wifi send:", byte: wifiSend)
-        self.wifiReceivedLabel.attributedText = self.attributedString(prefix: "wifi received:", byte: wifiReceived)
-        self.wwanSendLabel.attributedText = self.attributedString(prefix: "wwan send:", byte: wwanSend)
-        self.wwanReceivedLabel.attributedText = self.attributedString(prefix: "wwan received:", byte: wwanReceived)
     }
     
     private func attributedString(prefix:String,byte:UInt32) -> NSAttributedString {
@@ -39,14 +43,14 @@ class MonitorSysNetFlowView: UIButton {
         let storage = Double(byte).storageCapacity()
         
         result.append(NSAttributedString(string: prefix + "  ",
-                                         attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 10),
-                                                      NSForegroundColorAttributeName:UIColor.white]))
+                                         attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 10),
+                                                      NSAttributedStringKey.foregroundColor:UIColor.white]))
         result.append(NSAttributedString(string: String.init(format: "%.1f",storage.capacity),
-                                         attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-UltraLight", size: 18),
-                                                      NSForegroundColorAttributeName:UIColor.white]))
+                                         attributes: [NSAttributedStringKey.font:UIFont(name: "HelveticaNeue-UltraLight", size: 18) as Any,
+                                                      NSAttributedStringKey.foregroundColor:UIColor.white]))
         result.append(NSAttributedString(string: storage.unit,
-                                         attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-UltraLight", size: 12),
-                                                      NSForegroundColorAttributeName:UIColor.white]))
+                                         attributes: [NSAttributedStringKey.font:UIFont(name: "HelveticaNeue-UltraLight", size: 12) as Any,
+                                                      NSAttributedStringKey.foregroundColor:UIColor.white]))
         return result
     }
     

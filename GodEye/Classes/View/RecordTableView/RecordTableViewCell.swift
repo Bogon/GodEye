@@ -27,7 +27,12 @@ class RecordTableViewCell: UITableViewCell {
     }
     
     func configure(_ attributedText: NSAttributedString) {
-        self.logTextView.attributedText = attributedText
+        weak var weakSelf = self
+        dispatch_async_safely_to_main_queue {
+            guard let strongSelf = weakSelf else { return }
+             strongSelf.logTextView.attributedText = attributedText
+         }
+        
     }
     
     override func layoutSubviews() {

@@ -9,6 +9,24 @@
 import Foundation
 import SystemEye
 
+func dispatch_async_safely_to_main_queue(_ block: @escaping ()->()) {
+    dispatch_async_safely_to_queue(DispatchQueue.main, block)
+}
+
+// This methd will dispatch the `block` to a specified `queue`.
+// If the `queue` is the main queue, and current thread is main thread, the block
+// will be invoked immediately instead of being dispatched.
+func dispatch_async_safely_to_queue(_ queue: DispatchQueue, _ block: @escaping ()->()) {
+    if queue === DispatchQueue.main && Thread.isMainThread {
+        block()
+    } else {
+        queue.async {
+            block()
+        }
+    }
+}
+
+
 enum MonitorBaseViewPosition {
     case left
     case right
@@ -104,9 +122,9 @@ class MonitorBaseView: UIButton {
 
 // MARK: - Tool
 extension MonitorBaseView {
-    fileprivate func attributes(size:CGFloat) -> [String : Any] {
-        return [NSFontAttributeName:UIFont(name: "HelveticaNeue-UltraLight", size: size),
-                NSForegroundColorAttributeName:UIColor.white]
+    fileprivate func attributes(size:CGFloat) -> [NSAttributedStringKey : Any] {
+        return [NSAttributedStringKey.font:UIFont(name: "HelveticaNeue-UltraLight", size: size) as Any,
+                NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
     fileprivate func contentString(_ string:String,unit:String) -> NSAttributedString {
@@ -120,9 +138,16 @@ extension MonitorBaseView {
 
 // MARK: - Byte
 extension MonitorBaseView {
+    
+    
     func configure(byte:Double) {
         let str = byte.storageCapacity()
-        self.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", str.capacity), unit: str.unit)
+        weak var weakSelf = self
+        dispatch_async_safely_to_main_queue {
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", str.capacity), unit: str.unit)
+        }
+        
     }
 }
 
@@ -130,12 +155,22 @@ extension MonitorBaseView {
 // MARK: - Percent
 extension MonitorBaseView {
     func configure(percent:Double) {
-        self.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", percent), unit: "%")
+        weak var weakSelf = self
+        dispatch_async_safely_to_main_queue {
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", percent), unit: "%")
+        }
+        
     }
 }
 
 extension MonitorBaseView {
     func configure(fps: Double) {
-        self.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", fps), unit: "FPS")
+        weak var weakSelf = self
+        dispatch_async_safely_to_main_queue {
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.contentLabel.attributedText = self.contentString(String.init(format: "%.1f", fps), unit: "FPS")
+        }
+        
     }
 }

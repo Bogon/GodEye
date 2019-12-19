@@ -4,6 +4,10 @@
 
 # GodEye
 
+
+[![Swift 4.0+](https://img.shields.io/badge/Swift-4.0%2B-orange.svg)](https://github.com/zixun/AssistiveButton)
+
+
 [![Version](https://img.shields.io/cocoapods/v/Log4G.svg?style=flat)](http://cocoapods.org/pods/GodEye)
 [![License](https://img.shields.io/cocoapods/l/Log4G.svg?style=flat)](http://cocoapods.org/pods/GodEye)
 [![Platform](https://img.shields.io/cocoapods/p/Log4G.svg?style=flat)](http://cocoapods.org/pods/GodEye)
@@ -14,16 +18,16 @@ Automaticly display Log,Crash,Network,ANR,Leak,CPU,RAM,FPS,NetFlow,Folder and et
 
 It's so huge that I split it into several independent components:
 
-* [Log4G](https://github.com/zixun/Log4G) — Simple, lightweight logging framework written in Swift.
-* [AssistiveButton](https://github.com/zixun/AssistiveButton) — Simple Assistive Button.
-* [AppBaseKit](https://github.com/zixun/AppBaseKit) — A handy kit of Swift extensions and wrapped class to boost your productivity.
-* [AppSwizzle](https://github.com/zixun/AppSwizzle) — lightweight and flexible method swizzling wrapped by swift.
-* [LeakEye](https://github.com/zixun/LeakEye) — LeakEye is a memory leak monitor.
-* [NetworkEye](https://github.com/zixun/NetworkEye) — NetworkEye is a network monitor,automatic catch the request and response infomation of all kinds of request send.
-* [ANREye](https://github.com/zixun/ANREye) — ANREye is an ANR (Application Not Responding) monitor,automatic catch the ANR and return stacktrace of all threads.
-* [ASLEye](https://github.com/zixun/ASLEye) — ASLEye is an ASL(Apple System Log) monitor, automatic catch the log from NSLog by asl module.
-* [CrashEye](https://github.com/zixun/CrashEye) — CrashEye is an ios crash monitor，automatic catch exception crash & signal crash and return the stacktrace.
-* [SystemEye](https://github.com/zixun/SystemEye) — SystemEye is a system monitor,automatic catch the infomation of cpu,memory....etc.
+* [Log4G](https://github.com/Bogon/Log4G) — Simple, lightweight logging framework written in Swift.
+* [AssistiveButton](https://github.com/Bogon/AssistiveButton) — Simple Assistive Button.
+* [AppBaseKit](https://github.com/Bogon/AppBaseKit) — A handy kit of Swift extensions and wrapped class to boost your productivity.
+* [AppSwizzle](https://github.com/Bogon/AppSwizzle) — lightweight and flexible method swizzling wrapped by swift.
+* [LeakEye](https://github.com/Bogon/LeakEye) — LeakEye is a memory leak monitor.
+* [NetworkEye](https://github.com/Bogon/NetworkEye) — NetworkEye is a network monitor,automatic catch the request and response infomation of all kinds of request send.
+* [ANREye](https://github.com/Bogon/ANREye) — ANREye is an ANR (Application Not Responding) monitor,automatic catch the ANR and return stacktrace of all threads.
+* [ASLEye](https://github.com/Bogon/ASLEye) — ASLEye is an ASL(Apple System Log) monitor, automatic catch the log from NSLog by asl module.
+* [CrashEye](https://github.com/Bogon/CrashEye) — CrashEye is an ios crash monitor，automatic catch exception crash & signal crash and return the stacktrace.
+* [SystemEye](https://github.com/Bogon/SystemEye) — SystemEye is a system monitor,automatic catch the infomation of cpu,memory....etc.
 
 ## Features
 
@@ -65,7 +69,7 @@ GodEye is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "GodEye"
+pod 'GodEye'
 ```
 
 ## Book and Principle
@@ -78,7 +82,7 @@ pod "GodEye"
 
 ## OpenSource Application Use GodEye
 
-[CocoaChinaPlus](https://github.com/zixun/CocoaChinaPlus) is an open source application wrote by swift, now the GodEye is work well in it!
+[CocoaChinaPlus](https://github.com/Bogon/CocoaChinaPlus) is an open source application wrote by swift, now the GodEye is work well in it!
 
 ## Usage
 
@@ -114,6 +118,14 @@ the example above is custom command configuration, we also can custom control an
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## 维护者
+
+name: Bogon
+
+email: zhangqixcu@gmail.com
+
+github: [Bogon](https://github.com/Bogon)
 
 ## Author
 

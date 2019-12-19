@@ -72,7 +72,7 @@ class ConsolePrintViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        var rect = self.view.bounds
+        let rect = self.view.bounds
         if self.type == .command {
             let height: CGFloat = 28.0
             var rect = self.view.bounds
@@ -119,7 +119,7 @@ class ConsolePrintViewController: UIViewController {
         
         let image = self.recordTableView.swContentCapture { [unowned self] (image:UIImage?) in
             
-            let activity = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            let activity = UIActivityViewController(activityItems: [image as Any], applicationActivities: nil)
             if let popover = activity.popoverPresentationController {
                 popover.sourceView = self.view
                 popover.permittedArrowDirections = .up
@@ -174,13 +174,14 @@ extension ConsolePrintViewController: UITextFieldDelegate {
             return
         }
         
+        weak var weakSelf = self
         GodEyeController.shared
             .configuration
             .command
-            .execute(command: text) { [unowned self] (model:CommandRecordModel) in
-                
+            .execute(command: text) { (model:CommandRecordModel) in
+                guard let strongSelf = weakSelf else { return }
                 model.insert(complete: { (true:Bool) in
-                    self.addRecord(model: model)
+                    strongSelf.addRecord(model: model)
                 })
         }
         textField.text = ""

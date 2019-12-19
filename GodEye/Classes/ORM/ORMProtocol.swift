@@ -92,10 +92,9 @@ extension RecordORMProtocol {
         
         
         let insert = Self.table.insert(self.mappingToRelation())
-        
         Self.queue.async {
             do {
-                let rowid = try Self.connection?.run(insert)
+                _ = try Self.connection?.run(insert)
             }catch {
                 DispatchQueue.main.async {
                     complete(false)
@@ -111,7 +110,7 @@ extension RecordORMProtocol {
         let insert = Self.table.insert(self.mappingToRelation())
         
         do {
-            let rowid = try Self.connection?.run(insert)
+            _ = try Self.connection?.run(insert)
         }catch {
             complete(false)
         }
@@ -122,7 +121,7 @@ extension RecordORMProtocol {
         let pagesize = 100
         let offset = pagesize * index + Self.addCount
 
-        var select = self.configure(select: self.table.select(Self.col_id))
+        let select = Self.configure(select: Self.table.select(Self.col_id))
             .order(Self.col_id.desc)
             .limit(pagesize, offset: offset)
         
@@ -142,12 +141,14 @@ extension RecordORMProtocol {
     
     
     static func delete(complete:@escaping (_ success:Bool)->())  {
+        
         Self.queue.async {
-            let delete = self.table.delete()
+        
+            let delete = Self.table.delete()
             
             do {
-                let rowid = try Self.connection?.run(delete)
-                self.addCount = 0
+                _ = try Self.connection?.run(delete)
+                Self.addCount = 0
             }catch {
                 DispatchQueue.main.async {
                     complete(false)
@@ -181,7 +182,7 @@ extension RecordORMProtocol {
             let path = AppPathForDocumentsResource(relativePath: "/GodEye.sqlite")
             do {
                 guard let result = objc_getAssociatedObject(self, &key) as? Connection else {
-                    let result = try Connection(path)
+                    let result = try! Connection(path)
                     objc_setAssociatedObject(self, &key, result, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                     return result
                 }

@@ -91,12 +91,16 @@ extension NetworkRecordModel {
         self.requestTimeoutInterval = request != nil ? String(request!.timeoutInterval) : "nil"
         self.requestHTTPMethod = request?.httpMethod
         
+        
+        weak var weakSelf = self
         if let allHTTPHeaderFields = request?.allHTTPHeaderFields {
-            allHTTPHeaderFields.forEach({ [unowned self](e:(key: String, value: String)) in
-                if self.requestAllHTTPHeaderFields == nil {
-                    self.requestAllHTTPHeaderFields = "\(e.key):\(e.value)\n"
+            
+            allHTTPHeaderFields.forEach({ (e:(key: String, value: String)) in
+                guard let strongSelf = weakSelf else { return }
+                if strongSelf.requestAllHTTPHeaderFields == nil {
+                    strongSelf.requestAllHTTPHeaderFields = "\(e.key):\(e.value)\n"
                 }else {
-                    self.requestAllHTTPHeaderFields!.append("\(e.key):\(e.value)\n")
+                    strongSelf.requestAllHTTPHeaderFields!.append("\(e.key):\(e.value)\n")
                 }
             })
         }
@@ -118,12 +122,13 @@ extension NetworkRecordModel {
         self.responseSuggestedFilename = response?.suggestedFilename
         
         self.responseStatusCode = response?.statusCode ?? 200
-        
-        response?.allHeaderFields.forEach { [unowned self] (e:(key: AnyHashable, value: Any)) in
-            if self.responseAllHeaderFields == nil {
-                self.responseAllHeaderFields = "\(e.key) : \(e.value)\n"
+        weak var weakSelf = self
+        response?.allHeaderFields.forEach { (e:(key: AnyHashable, value: Any)) in
+            guard let strongSelf = weakSelf else { return }
+            if strongSelf.responseAllHeaderFields == nil {
+                strongSelf.responseAllHeaderFields = "\(e.key) : \(e.value)\n"
             }else {
-                self.responseAllHeaderFields!.append("\(e.key) : \(e.value)\n")
+                strongSelf.responseAllHeaderFields!.append("\(e.key) : \(e.value)\n")
             }
         }
         
@@ -160,7 +165,7 @@ extension NetworkRecordModel {
             let xmlString = String(data: data, encoding: String.Encoding.utf8)
             self.receiveJSONData = xmlString
         }else {
-            self.receiveJSONData = "Untreated MimeType:\(self.responseMIMEType)"
+            self.receiveJSONData = "Untreated MimeType:\(self.responseMIMEType ?? "None")"
         }
     }
     
