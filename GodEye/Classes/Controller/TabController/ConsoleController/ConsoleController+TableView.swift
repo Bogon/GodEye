@@ -29,10 +29,10 @@ extension ConsoleController {
     }
     
     private func indexPath(of type:RecordType) -> IndexPath? {
+
         for i in 0..<self.dataSource.count {
             let types = self.dataSource[i]
             for j in 0..<types.count {
-                
                 if self.dataSource[i][j] == type {
                     return IndexPath(row: j, section: i)
                 }
@@ -117,9 +117,9 @@ class ConsoleTableViewCell: UITableViewCell {
         let unread = type.unread()
         if unread == 0 {
             self.unreadLabel.text = nil
-        }else if unread >= 100 {
+        } else if unread >= 100 {
             self.unreadLabel.text = "99+"
-        }else {
+        } else {
             self.unreadLabel.text = String.init(unread)
         }
     }

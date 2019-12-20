@@ -19,18 +19,17 @@ class ViewController: UIViewController {
         
         self.view.addSubview(self.tableView)
         
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         Log4G.log("just log")
         
         DispatchQueue.global().async {
             Log4G.warning("just warning")
         }
-        
+
         Log4G.error("just error")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillLayoutSubviews() {

@@ -34,9 +34,14 @@ extension ConsoleController {
             pc.addRecord(model: model)
         }else {
             
-            let type = Swift.type(of:model).type
-            type.addUnread()
-            self.reloadRow(of: type)
+            weak var weakSelf = self
+            dispatch_async_safely_to_main_queue {
+                guard let strongSelf = weakSelf else { return }
+                let type = Swift.type(of:model).type
+                type.addUnread()
+                strongSelf.reloadRow(of: type)
+            }
+            
         }
     }
 }
@@ -49,9 +54,11 @@ extension ConsoleController: Log4GDelegate {
     
     func log4gDidRecord(with model:LogModel) {
         
+        weak var weakSelf = self
         let recordModel = LogRecordModel(model: model)
-        recordModel.insert(complete: { [unowned self] (success:Bool) in
-            self.addRecord(model: recordModel)
+        recordModel.insert(complete: { (success:Bool) in
+            guard let strongSelf = weakSelf else { return }
+            strongSelf.addRecord(model: recordModel)
         })
     }
 }
@@ -125,7 +132,7 @@ extension ConsoleController: ANREyeDelegate {
                                    mainThreadBacktrace: mainThreadBacktrace,
                                    allThreadBacktrace: allThreadBacktrace)
         weak var weakSelf = self
-        model.insert(complete:  { [unowned self] (success:Bool) in
+        model.insert(complete:  { (success:Bool) in
             guard let strongSelf = weakSelf else { return }
             strongSelf.addRecord(model: model)
         })

@@ -2,14 +2,14 @@
 # 提交修改，推到主分支
 echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 git add .
-git commit -m "修改版本号，支持swift最低版本4.0，支持iOS最低版本10.0"
+git commit -m "修改CPU占用过高的问题，界面会进一步美化"
 git push -u origin master
 
 echo '+++++++++++++++++++++++++++ commit successful ++++++++++++++++++++'
 
 # 注意需要修改当前的版本号
 echo '+++++++++++++++++++++++++++ pushing tags ++++++++++++++++++++'
-git tag 1.3.0
+git tag 1.4.1
 git push --tags
 
 echo '+++++++++++++++++++++++++++ pushing successful ++++++++++++++++++++'

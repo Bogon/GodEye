@@ -14,6 +14,22 @@ import LeakEye
 
 class ConsoleController: UIViewController {
     
+    /*
+     case log
+     case crash
+     case network
+     case anr
+     case leak
+     
+     case command
+     */
+    
+//    var logIndexPath: IndexPath?
+//    var crashIndexPath: IndexPath?
+//    var networkIndexPath: IndexPath?
+//    var anrIndexPath: IndexPath?
+//    var leakIndexPath: IndexPath?
+//    var commandIndexPath: IndexPath?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -27,7 +43,7 @@ class ConsoleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.niceBlack()
-        
+
         self.view.addSubview(self.tableView)
     }
     

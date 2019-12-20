@@ -6,8 +6,8 @@ PODS:
   - AssistiveButton (1.2.0)
   - CCProgressHUDKit (1.1.1)
   - CrashEye (1.2.0)
-  - FileBrowser (0.2.0)
-  - GodEye (1.3.0):
+  - FileBrowser (1.0.0)
+  - GodEye (1.4.0):
     - ANREye
     - AppBaseKit
     - AppSwizzle
@@ -15,12 +15,12 @@ PODS:
     - AssistiveButton
     - CCProgressHUDKit
     - CrashEye
-    - FileBrowser (~> 0.2.0)
+    - FileBrowser (~> 1.0.0)
     - LeakEye
     - Log4G
     - MJRefresh (~> 3.1.12)
     - NetworkEye.swift
-    - SQLite.swift (~> 0.11.1)
+    - SQLite.swift (~> 0.12.2)
     - SwViewCapture
     - SystemEye
   - LeakEye (1.2.0):
@@ -29,9 +29,9 @@ PODS:
   - MJRefresh (3.1.17)
   - NetworkEye.swift (1.2.0):
     - AppSwizzle (~> 1.3.1)
-  - SQLite.swift (0.11.6):
-    - SQLite.swift/standard (= 0.11.6)
-  - SQLite.swift/standard (0.11.6)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
   - SwViewCapture (1.0.6)
   - SystemEye (0.3.0)
 
@@ -68,13 +68,13 @@ SPEC CHECKSUMS:
   AssistiveButton: eb9dced394fcdee4acdd5c1b63e8846ab72f6d37
   CCProgressHUDKit: ed58b1c1310ea745d489db816d8992a874e914f8
   CrashEye: 89d1ca174f0ef3ceeb27152f578c0a61667ba799
-  FileBrowser: af8abc035daca66a6066351ae162c4af4c6b24dd
-  GodEye: aeda0dc9391dce0d23019a6ae89a760266481f59
+  FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
+  GodEye: dbdcd03d3e6353145d861fc0d345d389b468f212
   LeakEye: 2382ea37ddb10cda7556dbe541b81e0b4df7fdcb
   Log4G: b05af86e6a876d911d97dca38f88e91eec7c3ebc
   MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
   NetworkEye.swift: c9d1750edd5e11863db3029ac7eddae299676cf4
-  SQLite.swift: 46d890be8601964454bd3392527f863d1b802d45
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwViewCapture: edf1ea74e164f47af005fbdfdc6fc18ec373ec69
   SystemEye: 06449d1fab0256231021e83789259a42d69689f5
 

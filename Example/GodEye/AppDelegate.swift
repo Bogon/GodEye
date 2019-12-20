@@ -9,6 +9,7 @@
 import UIKit
 import GodEye
 import CCProgressHUDKit
+import Log4G
 
 func dispatch_async_safely_to_main_queue(_ block: @escaping ()->()) {
     dispatch_async_safely_to_queue(DispatchQueue.main, block)
@@ -29,24 +30,20 @@ func dispatch_async_safely_to_queue(_ queue: DispatchQueue, _ block: @escaping (
 
 func alert(t:String, _ m:String) {
     
-    MBProgressHUD.showSuccess("\(t) \n \(m)")
-//    let alertView = UIAlertView()
-//    alertView.title = t
-//    alertView.message = m
-//    alertView.addButton(withTitle: "OK")
-//    alertView.show()
+    dispatch_async_safely_to_main_queue {
+        MBProgressHUD.showSuccess("\(t) \n \(m)", to: UIApplication.shared.keyWindow?.rootViewController?.view)
+    }
+
 }
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //        GodEye.makeEye(with: self.window!)
 //        
-        
+        Log4G.log("didFinishLaunchingWithOptions")
         
         let configuration = Configuration()
         configuration.command.add(command: "test", description: "test command") { () -> (String) in
@@ -59,5 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GodEye.makeEye(with: self.window!, configuration: configuration)
         return true
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        Log4G.log("applicationWillTerminate")
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Log4G.log("applicationDidBecomeActive")
+    }
+    
 }
 

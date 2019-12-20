@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GodEye'
-  s.version          = '1.3.0'
+  s.version          = '1.4.1'
   s.summary          = 'Automaticly display Log,Crash,Network,ANR,Leak,CPU,RAM,FPS,NetFlow,Folder and etc with one line of code based on Swift. Just like God opened his eyes.'
   s.swift_version    = '4.0'
 # This description is used to generate tags and improve search results.
@@ -40,21 +40,21 @@ Automaticly display Log,Crash,Network,ANR,Leak,CPU,RAM,FPS,NetFlow,Folder and et
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
-    s.dependency 'AppBaseKit'
-    s.dependency 'Log4G'
-    s.dependency 'AppSwizzle'
-    s.dependency 'AssistiveButton'
+    s.dependency 'AppBaseKit'       #, '~> 1.3.0'
+    s.dependency 'Log4G'        #, '~> 1.3.0'
+    s.dependency 'AppSwizzle'   #, '~> 0.4.2'
+    s.dependency 'AssistiveButton'      #, '~> 1.4.1'
 
-    s.dependency 'ASLEye'
-    s.dependency 'CrashEye'
-    s.dependency 'ANREye'
-    s.dependency 'SystemEye'
-    s.dependency 'NetworkEye.swift'
-    s.dependency 'LeakEye'
+    s.dependency 'ASLEye'       #, '~> 1.3.0'
+    s.dependency 'CrashEye' #, '~> 1.3.1'
+    s.dependency 'ANREye'   #, '~> 1.3.0'
+    s.dependency 'SystemEye'    #, '~> 1.3.0'
+    s.dependency 'NetworkEye.swift' #, '~> 1.3.0'
+    s.dependency 'LeakEye'  #, '~> 1.3.0'
 
-    s.dependency 'FileBrowser', '~> 0.2.0'
-    s.dependency 'SwViewCapture'
-    s.dependency 'SQLite.swift', '~> 0.11.1'
+    s.dependency 'FileBrowser', '~> 1.0.0'
+    s.dependency 'SwViewCapture'        #, '~> 1.3.0'
+    s.dependency 'SQLite.swift', '~> 0.12.2'
     s.dependency 'MJRefresh', '~> 3.1.12'
     
     s.dependency 'CCProgressHUDKit'

@@ -96,13 +96,21 @@ extension RecordORMProtocol {
             do {
                 _ = try Self.connection?.run(insert)
             }catch {
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
+//                    complete(false)
+//                }
+                dispatch_async_safely_to_main_queue {
                     complete(false)
                 }
+                
             }
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
+//                complete(true)
+//            }
+            dispatch_async_safely_to_main_queue {
                 complete(true)
             }
+            
         }
     }
     

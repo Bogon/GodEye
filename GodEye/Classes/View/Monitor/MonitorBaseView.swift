@@ -41,6 +41,7 @@ class MonitorBaseView: UIButton {
     private(set) var type: MonitorSystemType!
     
     init(type:MonitorSystemType) {
+        
         super.init(frame: CGRect.zero)
         self.type = type
         self.infoLabel.text = type.info

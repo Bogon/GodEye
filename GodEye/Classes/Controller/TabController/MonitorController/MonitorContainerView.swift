@@ -124,7 +124,7 @@ class MonitorContainerView: UIScrollView,FPSDelegate,NetDelegate {
     // MARK: PRIVATE PROPERTY
     //--------------------------------------------------------------------------
     
-    private lazy var fps: FPS = { [unowned self] in
+    private lazy var fps: FPS = { 
         let new = FPS()
         new.delegate = self
         return new
@@ -138,49 +138,49 @@ class MonitorContainerView: UIScrollView,FPSDelegate,NetDelegate {
     
     private var deviceView = MonitorDeviceView()
     
-    private lazy var appCPUView: MonitorBaseView = { [unowned self] in
+    private lazy var appCPUView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.appCPU)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var appRAMView: MonitorBaseView = { [unowned self] in
+    private lazy var appRAMView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.appRAM)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var appFPSView: MonitorBaseView = { [unowned self] in
+    private lazy var appFPSView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.appFPS)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var appNetView: MonitorBaseView = { [unowned self] in
+    private lazy var appNetView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.appNET)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
 
-    private lazy var sysCPUView: MonitorBaseView = { [unowned self] in
+    private lazy var sysCPUView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.sysCPU)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var sysRAMView: MonitorBaseView = { [unowned self] in
+    private lazy var sysRAMView: MonitorBaseView = {
         let new = MonitorBaseView(type: MonitorSystemType.sysRAM)
         new.addTarget(self, action: #selector(MonitorContainerView.didTap(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var sysNetView: MonitorSysNetFlowView = { [unowned self] in
+    private lazy var sysNetView: MonitorSysNetFlowView = {
         let new = MonitorSysNetFlowView(type: MonitorSystemType.sysNET)
         new.addTarget(self, action: #selector(MonitorContainerView.didTapSysNetView(sender:)), for: .touchUpInside)
         return new
     }()
     
-    private lazy var monitorAppViews: [MonitorBaseView] = { [unowned self] in
+    private lazy var monitorAppViews: [MonitorBaseView] = {
         var new = [MonitorBaseView]()
         
         self.addSubview(self.appCPUView)
@@ -200,7 +200,7 @@ class MonitorContainerView: UIScrollView,FPSDelegate,NetDelegate {
         return new
     }()
     
-    private lazy var monitorSysViews: [MonitorBaseView] = { [unowned self] in
+    private lazy var monitorSysViews: [MonitorBaseView] = {
         var new = [MonitorBaseView]()
         
         self.addSubview(self.sysCPUView)
