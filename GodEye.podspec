@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GodEye'
-  s.version          = '1.4.1'
+  s.version          = '1.4.5'
   s.summary          = 'Automaticly display Log,Crash,Network,ANR,Leak,CPU,RAM,FPS,NetFlow,Folder and etc with one line of code based on Swift. Just like God opened his eyes.'
   s.swift_version    = '4.0'
 # This description is used to generate tags and improve search results.
@@ -57,5 +57,5 @@ Automaticly display Log,Crash,Network,ANR,Leak,CPU,RAM,FPS,NetFlow,Folder and et
     s.dependency 'SQLite.swift', '~> 0.12.2'
     s.dependency 'MJRefresh', '~> 3.1.12'
     
-    s.dependency 'CCProgressHUDKit'
+    #s.dependency 'CCProgressHUDKit'
 end

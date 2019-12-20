@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CCProgressHUDKit
+//import CCProgressHUDKit
 
 class SettingController: UIViewController {
     
@@ -105,7 +105,12 @@ extension SettingController: UITableViewDataSource, UITableViewDelegate {
         if index == 0 {
             let manager = EyesManager.shared
             sender.isOn == true ? manager.openASLEye() : manager.closeASLEye()
-            MBProgressHUD.showSuccess("INFO: ASL Eye will case a bit of cpu usage.\nif you are collecting the cpu usage, please turn it off")
+            //MBProgressHUD.showSuccess("INFO: ASL Eye will case a bit of cpu usage.\nif you are collecting the cpu usage, please turn it off")
+            let alert = UIAlertController.init(title: "提示", message: "INFO: ASL Eye will case a bit of cpu usage.\nif you are collecting the cpu usage, please turn it off", preferredStyle: UIAlertControllerStyle.alert)
+             alert.addAction(UIAlertAction.init(title: "好", style: UIAlertActionStyle.cancel, handler: { (alertaction) in
+                 
+             }))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
 //            UIAlertView(title: "INFO",
 //                        message: "ASL Eye will case a bit of cpu usage.\nif you are collecting the cpu usage, please turn it off",
 //                        delegate: nil,

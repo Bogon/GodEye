@@ -8,7 +8,7 @@
 
 import UIKit
 import GodEye
-import CCProgressHUDKit
+//import CCProgressHUDKit
 import Log4G
 
 func dispatch_async_safely_to_main_queue(_ block: @escaping ()->()) {
@@ -30,9 +30,16 @@ func dispatch_async_safely_to_queue(_ queue: DispatchQueue, _ block: @escaping (
 
 func alert(t:String, _ m:String) {
     
-    dispatch_async_safely_to_main_queue {
-        MBProgressHUD.showSuccess("\(t) \n \(m)", to: UIApplication.shared.keyWindow?.rootViewController?.view)
-    }
+//    dispatch_async_safely_to_main_queue {
+//        //MBProgressHUD.showSuccess("\(t) \n \(m)", to: UIApplication.shared.keyWindow?.rootViewController?.view)
+//    }
+    
+    let alert = UIAlertController.init(title: t, message: m, preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction.init(title: "好", style: UIAlertActionStyle.cancel, handler: { (alertaction) in
+        
+    }))
+   UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+    
 
 }
 

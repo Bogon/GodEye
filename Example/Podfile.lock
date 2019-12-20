@@ -4,16 +4,14 @@ PODS:
   - AppSwizzle (1.3.1)
   - ASLEye (1.2.0)
   - AssistiveButton (1.2.0)
-  - CCProgressHUDKit (1.1.1)
   - CrashEye (1.2.0)
   - FileBrowser (1.0.0)
-  - GodEye (1.4.0):
+  - GodEye (1.4.1):
     - ANREye
     - AppBaseKit
     - AppSwizzle
     - ASLEye
     - AssistiveButton
-    - CCProgressHUDKit
     - CrashEye
     - FileBrowser (~> 1.0.0)
     - LeakEye
@@ -45,7 +43,6 @@ SPEC REPOS:
     - AppSwizzle
     - ASLEye
     - AssistiveButton
-    - CCProgressHUDKit
     - CrashEye
     - FileBrowser
     - LeakEye
@@ -66,10 +63,9 @@ SPEC CHECKSUMS:
   AppSwizzle: db36e436f56110d93e5ae0147683435df593cabc
   ASLEye: f0ebb668dc7f0c1d45b8ad250e6139e1c130dcc3
   AssistiveButton: eb9dced394fcdee4acdd5c1b63e8846ab72f6d37
-  CCProgressHUDKit: ed58b1c1310ea745d489db816d8992a874e914f8
   CrashEye: 89d1ca174f0ef3ceeb27152f578c0a61667ba799
   FileBrowser: 2ca91ff61c9ea09665eb3b8f9e64a7a77e66a0bf
-  GodEye: dbdcd03d3e6353145d861fc0d345d389b468f212
+  GodEye: 7a34adafd43d38931bf2b1687a36d9f7ca13fd02
   LeakEye: 2382ea37ddb10cda7556dbe541b81e0b4df7fdcb
   Log4G: b05af86e6a876d911d97dca38f88e91eec7c3ebc
   MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
